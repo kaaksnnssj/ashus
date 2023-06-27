@@ -56,7 +56,7 @@ app.get('/api/samp', function (req, res) {
           'hostname': response['hostname'],
           'gamemode': response['gamemode'],
           'language': response['mapname'] || '-',
-          'passworded': response['passworded'] || '-',
+          'passworded': response['passworded'],
           'maxplayers': response['maxplayers'],
           'isPlayerOnline': response['online'],
           'rule': {

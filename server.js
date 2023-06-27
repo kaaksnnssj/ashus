@@ -138,7 +138,7 @@ app.get('/api/fivem', function (req, res) {
     .then((players) => {
       const formattedPlayers = players.slice(0, 11).map((player, index) => {
         const playerNumber = index.toString().padEnd(2);
-        const formattedName = player.name.padEnd(20);
+        const formattedName = player.name.padEnd(15);
         const formattedID = player.id.toString().padEnd(10);
         const formattedPing = player.ping.toString().padEnd(4);
         return `${playerNumber} ${formattedName} ${formattedID} ${formattedPing}`;

@@ -140,7 +140,7 @@ app.get('/api/fivem', function (req, res) {
         const playerNumber = index.toString().padEnd(2);
         const formattedName = player.name.padEnd(20);
         const formattedID = player.id.toString().padEnd(10);
-        const formattedPing = player.ping.toString().padEnd(10);
+        const formattedPing = player.ping.toString().padEnd(4);
         return `${playerNumber} ${formattedName} ${formattedID} ${formattedPing}`;
       }).join('\n');
 

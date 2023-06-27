@@ -134,15 +134,15 @@ app.get('/api/fivem', function (req, res) {
 
   const server = new fivem.DiscordFivemApi(serverip);
 
- // server.getPlayers()
- //   .then((players) => {
-  //    const formattedPlayers = players.slice(0, 11).map((player, index) => {
- //       const playerNumber = index.toString().padEnd(2);
- //       const formattedName = player.name.padEnd(14);
-//      const formattedID = player.id.toString().padEnd(5);
- //       const formattedPing = player.ping.toString().padEnd(4);
-  //      return `${playerNumber} ${formattedName} ${formattedID} ${formattedPing}`;
-  //    }).join('\n');
+  server.getPlayers()
+    .then((players) => {
+      const formattedPlayers = players.slice(0, 11).map((player, index) => {       
+      const playerNumber = index.toString().padEnd(2);
+      const formattedName = player.name.padEnd(14);
+      const formattedID = player.id.toString().padEnd(5);
+      const formattedPing = player.ping.toString().padEnd(4);
+      return `${playerNumber} ${formattedName} ${formattedID} ${formattedPing}`;
+      }).join('\n');
 
       gamedig.query(options)
         .then((response) => {
@@ -154,7 +154,7 @@ app.get('/api/fivem', function (req, res) {
               'ping': response['ping'] || '-',
               'players': response['players'].length || 0,
               'maxplayers': response['maxplayers'] || '-',
-              //'isPlayersIngame': formattedPlayers
+              'isPlayersIngame': formattedPlayers
             }
           };
           res.json(responseJson);

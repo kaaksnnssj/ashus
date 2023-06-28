@@ -122,7 +122,7 @@ app.get('/api/player', function (req, res) {
     });
 });
 
-app.get('/api/fivem', function (req, res) {
+app.get('/api/fivemp', function (req, res) {
   const ip = req.query.ip;
   const port = req.query.port;
   const serverip = `${ip}:${port}`;
@@ -168,6 +168,38 @@ app.get('/api/fivem', function (req, res) {
       console.error("Error fetching player data:", error);
       res.status(404).json({ 'error': 'Something Went Wrong. Please Check IP And Port Correctly or Try Again Later' });
     });
+});
+
+app.get('/api/fivem', function (req, res) {
+    const ip = req.query.ip;
+    const port = req.query.port;
+    const serverip = `${ip}:${port}`;
+    const options = {
+        type: 'fivem',
+        host: ip,
+        port: port
+    };
+
+    gamedig.query(options)
+        .then((response) => {
+            const playersList = response.players.map((player) => player.name).slice(0, 11).join('\n');
+            const responseJson = {
+                'response': {
+                    'serverip': serverip,
+                    'hostname': response['name'] || '-',
+                    'map': response['map'] || '-',
+                    'ping': response['ping'] || '-',
+                    'players': response['players'].length || 0,
+                    'maxplayers': response['maxplayers'] || '-',
+                    'isPlayersIngame': playersList
+                }
+            };
+            res.json(responseJson);
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(404).json({'error': 'Something Went Wrong. Please Check IP And Port Correctly or Try Again Later'});
+        });
 });
 
 app.get('/api/minecraft', function (req, res) {

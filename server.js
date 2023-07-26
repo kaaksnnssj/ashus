@@ -9,7 +9,7 @@ const port = 8080;
 app.get('/api/ping', function (req, res) {
     const ip = req.query.ip;
     const port = req.query.port;
-    Gamedig.query({
+    gamedig.query({
     type: 'samp',
     host: ip,
     port: port

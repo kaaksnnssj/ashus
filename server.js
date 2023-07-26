@@ -16,7 +16,7 @@ app.get('/api/ping', function (req, res) {
 }).then((state) => {
     res.json({'response': {'ping': state['ping']}});
 }).catch((error) => {
-    res.json({'error': 'Something Went Wrong Please Check ip And port correcly or Please Try Again Later'});
+    res.json({'error': 'Something Went Wrong Please Check IP And Port Correctly or Please Try Again Later'});
 });
 })
 

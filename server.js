@@ -6,6 +6,20 @@ const portscanner = require('portscanner');
 const app = express();
 const port = 8080;
 
+app.get('/api/ping', function (req, res) {
+    const ip = req.query.ip;
+    const port = req.query.port;
+    Gamedig.query({
+    type: 'samp',
+    host: ip,
+    port: port
+}).then((state) => {
+    res.json({'response': {'ping': state['ping']}});
+}).catch((error) => {
+    res.json({'error': 'Something Went Wrong Please Check ip And port correcly or Please Try Again Later'});
+});
+})
+
 app.get('/api/scan', function (req, res) {
     const ip = req.query.ip;
     const port = req.query.port;
